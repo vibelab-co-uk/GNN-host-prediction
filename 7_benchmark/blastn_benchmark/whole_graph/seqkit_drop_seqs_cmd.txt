@@ -1,0 +1,1 @@
+/Applications/seqkit grep -v -f seqs_to_drop.txt /Users/jamieherzig/Documents/clean_run/1_nucleotide_processing/1_initial_cleaning/11158_paramyxoviridae_cleaned_nucseqs_21112025.fasta -o 11158_paramyxoviridae_cleaned_nucseqs_forblast_21112025.fasta

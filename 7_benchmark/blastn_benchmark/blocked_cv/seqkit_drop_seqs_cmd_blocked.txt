@@ -1,0 +1,18 @@
+#!/bin/bash
+#$ -cwd
+
+for d in */ ; do
+
+	/Applications/seqkit grep -v -f $d/all_drop_seqs.txt ../../../1_nucleotide_processing/1_initial_cleaning/11158_paramyxoviridae_cleaned_nucseqs_21112025.fasta -o $d/11158_paramyxoviridae_cleaned_nucseqs_forblast_21112025.fasta
+
+	/Applications/seqkit grep -f $d/N_query_seqs.txt ../../../2_protein_orf_processing/nucleocapsid_orfs.fasta -o $d/N_queryseqs.fasta
+
+	/Applications/seqkit grep -f $d/M_query_seqs.txt ../../../2_protein_orf_processing/matrix_orfs.fasta -o $d/M_queryseqs.fasta
+	
+	/Applications/seqkit grep -f $d/F_query_seqs.txt ../../../2_protein_orf_processing/fusion_orfs.fasta -o $d/F_queryseqs.fasta
+	
+	/Applications/seqkit grep -f $d/HN_query_seqs.txt ../../../2_protein_orf_processing/attachment_orfs.fasta -o $d/HN_queryseqs.fasta
+	
+	/Applications/seqkit grep -f $d/L_query_seqs.txt ../../../2_protein_orf_processing/polymerase_orfs.fasta -o $d/L_queryseqs.fasta
+
+done

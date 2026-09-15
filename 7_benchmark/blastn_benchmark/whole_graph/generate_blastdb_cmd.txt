@@ -1,0 +1,1 @@
+/Applications/ncbi-blast-2.17.0\+/bin/makeblastdb -in ../../../7_benchmark/blastn_benchmark/11158_paramyxoviridae_cleaned_nucseqs_forblast_21112025.fasta -title paramyxodb_211125 -dbtype nucl -out paramyxodb_211125 -parse_seqids

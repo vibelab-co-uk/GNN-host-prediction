@@ -1,0 +1,11 @@
+#!/bin/bash
+#$ -cwd
+
+for d in */ ; do
+
+	cd $d
+
+	./generate_blastdb_run_blastn_cmd_blocked.txt
+
+	cd ..
+done

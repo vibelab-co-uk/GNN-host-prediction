@@ -1,0 +1,20 @@
+#!/bin/bash
+#$ -cwd
+
+for i in 0.4 0.6 0.8 0.9 0.95
+do
+	for l in 0.4 0.6 0.8 0.9 0.95
+	do
+		
+		cd "${i}_${l}_clusters"
+
+		echo "$i" > ../current_values.txt
+		echo "$l" >> ../current_values.txt
+		
+		mmseqs easy-linclust /Users/jamieherzig/Documents/clean_run/1_nucleotide_processing/1_initial_cleaning/11158_paramyxoviridae_cleaned_nucseqs_21112025.fasta output.FASTA output --min-seq-id $i -c $l --cov-mode 0
+
+		R CMD BATCH --no-restore ../process_calc_feats_clustered_TUNING_FILE.R
+		
+		cd ..
+	done
+done

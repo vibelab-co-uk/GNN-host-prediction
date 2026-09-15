@@ -1,0 +1,19 @@
+#!/bin/bash
+#$ -cwd
+
+for d in */ ; do
+
+	/Applications/ncbi-blast-2.17.0\+/bin/makeblastdb -in $d/11158_paramyxoviridae_cleaned_nucseqs_forblast_21112025.fasta -title paramyxodb_211125 -dbtype nucl -out paramyxodb_211125 -parse_seqids
+
+	/Applications/ncbi-blast-2.17.0\+/bin/blastn -query $d/N_queryseqs.fasta -db paramyxodb_211125 -task dc-megablast -out $d/Norfs_dcmegablast_results.txt -outfmt 6 
+
+	/Applications/ncbi-blast-2.17.0\+/bin/blastn -query $d/M_queryseqs.fasta -db paramyxodb_211125 -task dc-megablast -out $d/Morfs_dcmegablast_results.txt -outfmt 6 
+
+	/Applications/ncbi-blast-2.17.0\+/bin/blastn -query $d/F_queryseqs.fasta -db paramyxodb_211125 -task dc-megablast -out $d/Forfs_dcmegablast_results.txt -outfmt 6 
+
+	/Applications/ncbi-blast-2.17.0\+/bin/blastn -query $d/HN_queryseqs.fasta -db paramyxodb_211125 -task dc-megablast -out $d/HNorfs_dcmegablast_results.txt -outfmt 6 
+
+	/Applications/ncbi-blast-2.17.0\+/bin/blastn -query $d/L_queryseqs.fasta -db paramyxodb_211125 -task dc-megablast -out $d/Lorfs_dcmegablast_results.txt -outfmt 6 
+
+	rm paramyxodb_211125*
+done

@@ -1,0 +1,1 @@
+/Applications/seqkit grep -v -f seqs_to_drop.txt ../../../7_benchmark/new_sequences/1_nucleotide_processing/1_initial_cleaning/2_combined_dataset_cleaning/11158_paramyxoviridae_cleaned_nucseqs_combined_nodups.fasta -o 11158_paramyxoviridae_cleaned_nucseqs_forblast_combined.fasta

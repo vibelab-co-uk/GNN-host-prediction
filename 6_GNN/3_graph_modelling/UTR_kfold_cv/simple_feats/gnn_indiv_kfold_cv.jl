@@ -1,0 +1,112 @@
+begin
+    using Graphs
+    using GraphIO.EdgeList
+    using DataFrames, CSV
+    using GLM, StatsBase
+    using Flux
+    using Flux: onecold, onehotbatch, logitcrossentropy
+    using LinearAlgebra, Random, Statistics, StatsBase
+    using GraphNeuralNetworks
+    using DelimitedFiles
+    using MLDatasets, MLUtils
+    using TSne, Distances
+    using CUDA
+end
+
+include("./gnn_funcs.jl") # load loss and train functions
+
+# get names of all feature sets with a regex
+rx_file = r"count_feats.*"
+rx_dir = r"results_.*"
+
+in_feats = readdir("./feature_sets/", join=true)[occursin.(rx_file, readdir("./feature_sets/", join=true))]
+out_dir = readdir("./feature_sets/", join=true)[occursin.(rx_dir, readdir("./feature_sets/", join=true))]
+
+hidden_layers = [128,256,512,1024]
+n_layers = [2,3,4]
+
+# define struct with arguments for the `train` function 
+Base.@kwdef mutable struct Args
+    η = 1.0f-3             # learning rate
+    epochs = 500          # number of epochs
+    seed = 22             # set seed > 0 for reproducibility
+    usecuda = true      # if true use cuda (if available)
+    nhidden = 128       # dimension of hidden features
+    infotime = 50      # report every `infotime` epochs
+    nlayers = 2        # number of hidden layers
+    patience = 60      # patience period before early stopping test applies
+end
+
+### read graph and metadata
+# edgelist
+coo_edgelist = readdlm("../../../../5_phylogeny/3_generate_graph/graph_data/patristic_paraymxo_graph_UTR.edgelist", Int64)
+
+# GNN package doesn't allow 0 indexed edgelists
+source = coo_edgelist[:, 1] .+ 1
+target = coo_edgelist[:, 2] .+ 1
+
+# edge weights
+edge_weights = CSV.File("../../../../5_phylogeny/3_generate_graph/graph_data/patristic_paramyxo_graph_branch_weights_UTR.csv") |> DataFrame
+
+# node metadata
+node_names = CSV.File("../../../../5_phylogeny/3_generate_graph/graph_data/patristic_paramyxo_graph_node_names_UTR.csv") |> DataFrame
+rename!(node_names, ["Node", "Accession"])
+
+# host labels
+host_labels = CSV.File("../../../../3_host_assignment/all_cluster_hosts_UTR.csv") |> DataFrame
+rename!(host_labels, ["Accession", "Host_label"])
+
+host_labels = dropmissing(leftjoin(node_names, host_labels, on=:Accession)) # use a join to ensure the host labels are in the same order as the node_names
+sort!(host_labels, :Node)
+
+# construct graph with edge weights
+g = to_bidirected(GNNGraph(source, target, edge_weights.x |> f32))
+
+# this gives a vector of host labels for each node
+g.ndata.accessions = host_labels[:, 2]
+g.ndata.labels = host_labels[:, 3]
+
+# read in cross validation folds
+cv_folds = CSV.read("../../../../6_GNN/1_generate_validation_sets/cv_folds_5_UTR.csv", DataFrame, missingstring = "NA")
+
+# set up loop over hyperparameters
+for i in hidden_layers, l in n_layers
+    function feature_comp_train(in_feats,out_dir)
+
+        print("Training models with $l hidden layers with dimension size $i")
+
+        node_feats = CSV.File(in_feats) |> DataFrame # read in node features
+        node_feats = node_feats[:, Not(:Host_rank)] # remove host rank column from feature set
+
+        node_feats = leftjoin(node_names, node_feats, on=:Accession) # use a join to ensure the node features are in the same order as the node_names
+        sort!(node_feats, :Node)
+
+        # convert the dataframe to an array with each column as feature vector for a node and assign node features
+        g.ndata.features = transpose(Matrix{Float32}(node_feats[:, 3:end]))
+
+        cv_out = DataFrame()# create empty DF to fill with ablated cv results
+
+        # set up k-fold cross validation loop
+        for c in eachcol(cv_folds)
+            # generate a boolean vector with true in the positions we want to use to train
+            mask = BitVector(undef, nrow(node_names)) # create an empty training mask
+            mask .= true
+            
+            @. mask[c[!ismissing(c)]] = false # assign the test mask from the current CV fold
+
+            # use the mask to assign train and test
+            g.ndata.train_mask = mask
+            g.ndata.test_mask = @. !mask
+
+            ### train models
+            abl_out = abl_train(g, out_dir, nhidden = i, nlayers = l)
+
+            append!(cv_out,abl_out)
+        end
+        # finally add a column reporting cv fold
+        cv_out.cv_fold = repeat(1:ncol(cv_folds), inner = nrow(node_feats))
+        
+        CSV.write(joinpath(out_dir,"abl_output_$(i)_$(l).csv"),cv_out) # write the full ablation prediction results table
+    end
+    feature_comp_train.(in_feats, out_dir)
+end

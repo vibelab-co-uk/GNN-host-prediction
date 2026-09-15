@@ -1,0 +1,10 @@
+/Applications/ncbi-blast-2.17.0\+/bin/blastn -query ../../../2_protein_orf_processing/nucleocapsid_orfs.fasta -db paramyxodb_211125 -task dc-megablast -out Norfs_dcmegablast_results.txt -outfmt 6 
+
+/Applications/ncbi-blast-2.17.0\+/bin/blastn -query ../../../2_protein_orf_processing/matrix_orfs.fasta -db paramyxodb_211125 -task dc-megablast -out Morfs_dcmegablast_results.txt -outfmt 6 
+
+/Applications/ncbi-blast-2.17.0\+/bin/blastn -query ../../../2_protein_orf_processing/fusion_orfs.fasta -db paramyxodb_211125 -task dc-megablast -out Forfs_dcmegablast_results.txt -outfmt 6 
+
+/Applications/ncbi-blast-2.17.0\+/bin/blastn -query ../../../2_protein_orf_processing/attachment_orfs.fasta -db paramyxodb_211125 -task dc-megablast -out HNorfs_dcmegablast_results.txt -outfmt 6 
+
+/Applications/ncbi-blast-2.17.0\+/bin/blastn -query ../../../2_protein_orf_processing/polymerase_orfs.fasta -db paramyxodb_211125 -task dc-megablast -out Lorfs_dcmegablast_results.txt -outfmt 6 
+

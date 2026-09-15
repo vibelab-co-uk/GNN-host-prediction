@@ -1,0 +1,1 @@
+cat /Users/jamieherzig/Documents/clean_run/7_benchmark/new_sequences/1_nucleotide_processing/2_clustering/combined_dataset_clustering/11158_paramyxoviridae_cleaned_nucseqs_combined.fasta | seqkit rmdup -s -D duplicated_seqs.txt
