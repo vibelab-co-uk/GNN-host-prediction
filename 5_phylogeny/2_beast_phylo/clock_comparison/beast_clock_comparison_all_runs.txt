@@ -1,0 +1,6 @@
+#!/bin/bash
+#$ -cwd
+/software/BEASTv10.5.0/bin/beast -seed 9374 ./GTR_HMC.xml
+/software/BEASTv10.5.0/bin/beast -seed 9374 ./GTR_Strict.xml
+/software/BEASTv10.5.0/bin/beast -seed 9374 ./GTR_UCRlog.xml
+

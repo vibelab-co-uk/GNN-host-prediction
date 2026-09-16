@@ -1,0 +1,32 @@
+
+Operator analysis
+Operator                                          Tuning   Count      Time     Time/Op  Pr(accept) Smoothed_Pr(accept)
+deltaExchange(F_orfs_aligned.gtr.rates)           0.061   36000      153533   4.26     0.2348      0.26        
+deltaExchange(F_orfs_aligned.frequencies)         0.008   36143      154246   4.27     0.2355      0.22        
+scale(F_orfs_aligned.alpha)                       0.926   36095      153351   4.25     0.2342      0.27        
+deltaExchange(HN_orfs_aligned.gtr.rates)          0.059   36161      356866   9.87     0.2344      0.22        
+deltaExchange(HN_orfs_aligned.frequencies)        0.005   36015      355362   9.87     0.2324      0.22        
+scale(HN_orfs_aligned.alpha)                      0.902   36108      355273   9.84     0.2351      0.22        
+deltaExchange(L_orfs_aligned.gtr.rates)           0.024   36112      366419   10.15    0.2345      0.22        
+deltaExchange(L_orfs_aligned.frequencies)         0.004   36288      367619   10.13    0.2322      0.26        
+scale(L_orfs_aligned.alpha)                       0.941   36154      365809   10.12    0.2327      0.29        
+deltaExchange(M_orfs_aligned.gtr.rates)           0.07    36026      130925   3.63     0.2351      0.21        
+deltaExchange(M_orfs_aligned.frequencies)         0.011   36016      131028   3.64     0.2336      0.25        
+scale(M_orfs_aligned.alpha)                       0.934   36096      129993   3.6      0.235       0.2         
+deltaExchange(N_orfs_aligned.gtr.rates)           0.055   36337      153996   4.24     0.2347      0.2         
+deltaExchange(N_orfs_aligned.frequencies)         0.008   36122      153430   4.25     0.2353      0.21        
+scale(N_orfs_aligned.alpha)                       0.923   35749      150342   4.21     0.2332      0.31        
+VanillaHMC(F_orfs_aligned.branchRatesHMC.rates)   0.0     36490      7380     0.2      0.8001      0.85        
+scale(F_orfs_aligned.branchRatesHMC.scale)        0.979   109061     462701   4.24     0.2342      0.26        
+VanillaHMC(HN_orfs_aligned.branchRatesHMC.rates)  0.0     36095      9471     0.26     0.7959      0.81        
+scale(HN_orfs_aligned.branchRatesHMC.scale)       0.972   108185     1064784  9.84     0.2337      0.22        
+VanillaHMC(L_orfs_aligned.branchRatesHMC.rates)   0.0     36220      9508     0.26     0.8028      0.84        
+scale(L_orfs_aligned.branchRatesHMC.scale)        0.986   108369     1094994  10.1     0.2347      0.23        
+VanillaHMC(M_orfs_aligned.branchRatesHMC.rates)   0.0     35756      6979     0.2      0.801       0.71        
+scale(M_orfs_aligned.branchRatesHMC.scale)        0.952   108334     390442   3.6      0.2354      0.34        
+VanillaHMC(N_orfs_aligned.branchRatesHMC.rates)   0.0     36044      7246     0.2      0.7984      0.79        
+scale(N_orfs_aligned.branchRatesHMC.scale)        0.972   108284     456003   4.21     0.2337      0.19        
+subtreeLeap(treeModel)                            0.318   7751458    12056280 1.56     0.234       0.28        
+subtreeJump(treeModel)                                    776114     1764668  2.27     0.0         0.0         
+scale(constant.popSize)                           0.616   108168     6204     0.06     0.2343      0.25        
+

@@ -19,6 +19,7 @@ clu_rep*
 !virus_host_lookup.csv
 !all_cluster_hosts.csv
 !*_folds_*.csv
+!/5_phylogeny/
 
 # ignore various R outputs and projects
 *.Rout

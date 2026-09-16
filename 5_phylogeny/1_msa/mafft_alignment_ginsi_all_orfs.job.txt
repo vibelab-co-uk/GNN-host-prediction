@@ -1,0 +1,5 @@
+/software/mafft-7.475/bin/mafft-ginsi --maxiterate 2 --thread 8 nucleocapsid_orfs.fasta > cluster_centroids_aligned_ginsi_nucleocapsid_orfs.fasta
+/software/mafft-7.475/bin/mafft-ginsi --maxiterate 2 --thread 8 matrix_orfs.fasta > cluster_centroids_aligned_ginsi_matrix_orfs.fasta
+/software/mafft-7.475/bin/mafft-ginsi --maxiterate 2 --thread 8 fusion_orfs.fasta > cluster_centroids_aligned_ginsi_fusion_orfs.fasta
+/software/mafft-7.475/bin/mafft-ginsi --maxiterate 2 --thread 8 attachment_orfs.fasta > cluster_centroids_aligned_ginsi_attachment_orfs.fasta
+/software/mafft-7.475/bin/mafft-ginsi --maxiterate 2 --thread 8 polymerase_orfs.fasta > cluster_centroids_aligned_ginsi_polymerase_orfs.fasta

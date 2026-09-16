@@ -1,0 +1,1 @@
+/software/mafft-7.475/bin/mafft-ginsi --maxiterate 2 --thread 8 matrix_orfs.fasta > cluster_centroids_aligned_ginsi_matrix_orfs.fasta

@@ -1,0 +1,20 @@
+
+Citations for this analysis: 
+
+FRAMEWORK
+BEAST primary citation:
+	Baele G, Ji X, Hassler GW, McCrone JT, Shao Y, Zhang Z, Holbrook AJ, Lemey P, Drummond AJ, Rambaut A, Suchard MA (2025) BEAST X for Bayesian phylogenetic, phylogeographic and phylodynamic inference. Nature Methods. . DOI:10.1038/s41592-025-02751-x
+Using linear-time branch-specific parameter differential calculations:
+	Ji X, Zhang Z, Holbrook A, Nishimura A, Beale G, Rambaut A, Lemey P, Suchard MA (2020) Gradients do grow on trees: a linear-time O(N)-dimensional gradient for statistical phylogenetics. Molecular Biology and Evolution. 37, 3047-3060
+
+HIGH-PERFORMANCE COMPUTING
+BEAGLE citation:
+	Ayres DL, Cummings MP, Baele G, Darling AE, Lewis PO, Swofford DL, Huelsenbeck JP, Lemey P, Rambaut A, Suchard MA (2019) BEAGLE 3: Improved performance, scaling and usability for a high-performance computing library for statistical phylogenetics. Systematic Biology. 68, 1052-1061
+
+SUBSTITUTION MODELS
+GTR nucleotide substitution model:
+	Tavaré S (1985) Some probabilistic and statistical problems in the analysis of DNA sequences. In: Miura R. M., editor. Lectures on Mathematics in the Life Sciences. 17, 57-86
+Discrete gamma-distributed rate heterogeneity model:
+	Yang Z (1994) Maximum likelihood phylogenetic estimation from DNA sequences with variable rates over sites: approximate methods. J. Mol. Evol.. 39, 306-314
+
+
