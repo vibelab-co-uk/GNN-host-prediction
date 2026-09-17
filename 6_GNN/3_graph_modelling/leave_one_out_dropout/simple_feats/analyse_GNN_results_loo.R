@@ -199,11 +199,6 @@ plot_feat_pscore_phylo <- function(target_feat){
   
   plot_res <- plot_res[,-1]
   
-  ### BIG BRAIN IDEA
-  # each column has its own colour scale from white to the discrete cartocolour of the host in question
-  # for this would have to make each plot separately and combine though
-  # OR just find a hinge point for a single colour scale but this is weird because the value required to be positive changes
-  
   gheatmap(p_point, plot_res, offset=0.1, width=0.4,colnames_angle=-45,hjust = 0,font.size = 3,
            custom_column_labels=str_sub(colnames(plot_res),start=5)) +
     scale_fill_continuous(palette = c("firebrick4","firebrick3","firebrick2","steelblue2","steelblue","steelblue4"),name = "Output probability") +
@@ -213,9 +208,6 @@ plot_feat_pscore_phylo <- function(target_feat){
   ggsave("new_seqs_heatmap_tree.pdf",width = 5000,height = 8000,units = "px",dpi=600)
   
 } 
-
-# oh wait just use the true values??
-### WE CAN DO THIS WITH EACH FEATURE AS A COLUMN (WILL NEED SOME PIVOTING PROBABLY)
 
 plot_res2 <- result_preds %>% 
   filter(feat == target_feat) %>% 

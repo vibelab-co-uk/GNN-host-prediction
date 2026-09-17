@@ -57,7 +57,6 @@ view(pred_node %>%
 view(pred_node %>% 
   filter(Correct == F) %>% 
   select(Observed,Predicted,prediction_node,feat))
-
          
          
 # read in graph 
